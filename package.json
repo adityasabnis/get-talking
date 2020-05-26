@@ -1,0 +1,48 @@
+{
+  "name": "speech-components",
+  "version": "1.0.0",
+  "description": "AdslotUi Components leveraging WebSpeechApi",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --inline --progress --port 8001 --config webpack.config.js --mode development --open --hot",
+    "build": "./node_modules/.bin/webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adityasabnis/speech-components.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adityasabnis/speech-components/issues"
+  },
+  "homepage": "https://github.com/adityasabnis/speech-components#readme",
+  "dependencies": {
+    "adslot-ui": "^27.8.15",
+    "lodash": "^4.17.15",
+    "moment": "^2.26.0",
+    "prettier": "^2.0.5",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "style-loader": "^1.2.1"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "sass-loader": "^8.0.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
