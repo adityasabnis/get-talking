@@ -4,7 +4,7 @@ import { AlertInput } from "../src/components";
 
 class App extends React.Component {
   render() {
-    return <AlertInput value="some text input" onValueChange={_.noop} />;
+    return <AlertInput value="some text input 12" onValueChange={_.noop} />;
   }
 }
 
