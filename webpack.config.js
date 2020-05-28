@@ -21,6 +21,7 @@ module.exports = (env, options) => {
         {
           test: /\.(js|jsx)$/,
           use: ["babel-loader"],
+          exclude: /node_modules/,
         },
         {
           test: /\.scss$/,
@@ -30,6 +31,28 @@ module.exports = (env, options) => {
               loader: "sass-loader",
               options: {
                 sourceMap: isDevMode,
+              },
+            },
+          ],
+        },
+        {
+          test: /\.css$/,
+          loader: "style-loader!css-loader",
+        },
+        {
+          test: /\.(png|jpg|gif|eot|ttf|woff|woff2)$/,
+          loader: 'url-loader',
+          options: {
+            limit: 10000
+          }
+        },
+        {
+          test: /\.svg$/i,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                encoding: false,
               },
             },
           ],
