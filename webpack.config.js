@@ -40,22 +40,11 @@ module.exports = (env, options) => {
           loader: "style-loader!css-loader",
         },
         {
-          test: /\.(png|jpg|gif|eot|ttf|woff|woff2)$/,
-          loader: 'url-loader',
+          test: /\.(png|jpg|gif|eot|ttf|svg|woff|woff2)$/,
+          loader: "url-loader",
           options: {
-            limit: 10000
-          }
-        },
-        {
-          test: /\.svg$/i,
-          use: [
-            {
-              loader: 'url-loader',
-              options: {
-                encoding: false,
-              },
-            },
-          ],
+            limit: 10000,
+          },
         },
       ],
     },

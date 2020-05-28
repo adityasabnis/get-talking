@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
-import { AlertInput as Component, Button, Select, SvgSymbol } from "adslot-ui";
-import { SVG_ICON_PATH } from "../../constants";
+import { AlertInput as Component, Button, Select } from "adslot-ui";
 
 class AlertInput extends React.Component {
   constructor(props) {
@@ -12,9 +11,11 @@ class AlertInput extends React.Component {
       isSupported: false,
       voices: [],
       currentVoice: null,
+      currentCharacter: 0,
       language: null,
     };
 
+    this.utterance = new SpeechSynthesisUtterance();
     this.textInput = React.createRef();
   }
 
@@ -22,6 +23,10 @@ class AlertInput extends React.Component {
     if (speechSynthesis || _.isFunction(speechSynthesis.getVoices)) {
       speechSynthesis.addEventListener("voiceschanged", this.populateVoices);
       this.setState({ isSupported: true });
+
+      speechSynthesis.addEventListener("boundary", ({ charindex }) => {
+        this.setState({ currentCharacter: charindex });
+      });
     }
   };
 
@@ -43,12 +48,10 @@ class AlertInput extends React.Component {
       return speechSynthesis.resume();
 
     const alertInput = this.textInput.current;
-    const value = alertInput.props.value;
-
-    var utterThis = new SpeechSynthesisUtterance(value);
-    console.log(this.state.currentVoice);
-    utterThis.voice = this.state.currentVoice.value;
-    speechSynthesis.speak(utterThis);
+    console.log({ alertInput });
+    this.utterance.text = alertInput.props.value;
+    this.utterance.voice = this.state.currentVoice.value;
+    speechSynthesis.speak(this.utterance);
   };
 
   handleOnPauseClick = () => {
@@ -82,10 +85,7 @@ class AlertInput extends React.Component {
             {this.state.currentVoice && (
               <div className="row">
                 <Button onClick={this.handleOnPlayClick}>Play</Button>
-                <SvgSymbol
-                  href={`${SVG_ICON_PATH}/pause.svg`}
-                  onClick={this.handleOnPauseClick}
-                />
+                <Button onClick={this.handleOnPauseClick}>Pause</Button>
                 <Button
                   onClick={() => {
                     speechSynthesis.resume();
