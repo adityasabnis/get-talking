@@ -1,3 +1,4 @@
 import AlertInput from "./AlertInput";
+import WithSpeech from "./WithSpeech";
 
-export { AlertInput };
+export { AlertInput, WithSpeech };

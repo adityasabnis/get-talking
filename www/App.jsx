@@ -1,5 +1,8 @@
 import React from "react";
-import { AlertInput } from "../src/components";
+import { AlertInput, WithSpeech } from "../src/components";
+import { AlertInput as Component } from "adslot-ui";
+
+const AlertInputWithSpeech = WithSpeech(Component);
 
 class App extends React.Component {
   state = {
@@ -8,10 +11,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <AlertInput
-        value={this.state.value}
-        onValueChange={({ target }) => this.setState({ value: target.value })}
-      />
+      <React.Fragment>
+        {/*        <AlertInput
+          value={this.state.value}
+          onValueChange={({ target }) => this.setState({ value: target.value })}
+        />*/}
+        <AlertInputWithSpeech
+          value={this.state.value}
+          onValueChange={({ target }) => this.setState({ value: target.value })}
+        />
+      </React.Fragment>
     );
   }
 }
