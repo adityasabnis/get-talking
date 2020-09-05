@@ -12,6 +12,7 @@ module.exports = (env, options) => {
   const isDevMode = options.mode === "development";
 
   return {
+    entry: [`${settings.wwwPath}/index.jsx`],
     devtool: isDevMode ? "source-map" : false,
     resolve: {
       extensions: [".jsx", ".js"],
@@ -20,8 +21,12 @@ module.exports = (env, options) => {
       rules: [
         {
           test: /\.(js|jsx)$/,
-          use: ["babel-loader"],
+          include: [settings.srcPath, settings.wwwPath],
+          loader: "babel-loader",
           exclude: /node_modules/,
+          // options: {
+          //   cacheDirectory: true,
+          // },
         },
         {
           test: /\.scss$/,
@@ -39,13 +44,6 @@ module.exports = (env, options) => {
           test: /\.css$/,
           loader: "style-loader!css-loader",
         },
-        {
-          test: /\.(png|jpg|gif|eot|ttf|svg|woff|woff2)$/,
-          loader: "url-loader",
-          options: {
-            limit: 10000,
-          },
-        },
       ],
     },
     plugins: [
@@ -53,6 +51,7 @@ module.exports = (env, options) => {
         verbose: true,
       }),
       new HtmlWebpackPlugin({
+        inject: true,
         template: path.join(settings.wwwPath, "index.html"),
       }),
     ],

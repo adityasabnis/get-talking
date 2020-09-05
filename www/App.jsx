@@ -1,25 +1,32 @@
 import React from "react";
-import { AlertInput, WithSpeech } from "../src/components";
-import { AlertInput as Component } from "adslot-ui";
+import { AlertInput, Textarea } from "adslot-ui";
+import { withSpeech, VoiceList } from "../src";
+import _ from "lodash";
 
-const AlertInputWithSpeech = WithSpeech(Component);
+const AlertInputWithSpeech = withSpeech(AlertInput);
+const TextareaWithSpeech = withSpeech(Textarea);
 
 class App extends React.Component {
   state = {
-    value: "some text input 12",
+    voice: null,
   };
 
   render() {
     return (
       <React.Fragment>
-        {/*        <AlertInput
-          value={this.state.value}
-          onValueChange={({ target }) => this.setState({ value: target.value })}
-        />*/}
         <AlertInputWithSpeech
-          value={this.state.value}
-          onValueChange={({ target }) => this.setState({ value: target.value })}
+          value={"Some Text Input 12"}
+          onValueChange={_.noop}
+          speechTextPropName={"value"}
+          voiceUri={"Karen"}
         />
+        <TextareaWithSpeech
+          value={"Some Text Input long for text area"}
+          onValueChange={_.noop}
+          speechTextPropName={"value"}
+          voiceUri={"Veena"}
+        />
+        <VoiceList onChange={(voice) => console.log(voice)} />
       </React.Fragment>
     );
   }

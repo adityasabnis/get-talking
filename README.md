@@ -1,3 +1,4 @@
-# SpeechComponents
+# Speech Components
 
-AdslotUi Components leveraging WebSpeechApi
+Higher order component giving speech functionality extension to any component by leveraging WebSpeechApi
+
