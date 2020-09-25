@@ -1,4 +1,3 @@
-import VoiceList from "./components/VoiceList";
-import withSpeech from "./components/withSpeech";
+import withSpeech from "./withSpeech";
 
-export { withSpeech, VoiceList };
+export { withSpeech };
