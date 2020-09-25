@@ -18,14 +18,13 @@ const withSpeech = (Component) => {
     }
 
     setSelectedVoice = (event) => {
-      console.log("Called: setSelectedVoice");
       event.preventDefault();
 
       const selectedVoice = _.find(
         speechSynthesis.getVoices(),
         (voice) => voice.voiceURI === this.props.voiceUri
       );
-      console.log("--->", { selectedVoice });
+
       if (selectedVoice) {
         this.setState({
           voice: selectedVoice,
@@ -59,7 +58,6 @@ const withSpeech = (Component) => {
     };
 
     render() {
-      console.log(`Called render: ${JSON.stringify(this.state)}`);
       return this.state.voice ? (
         <span
           className="gt__component-wrapper"
