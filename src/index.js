@@ -1,3 +1,2 @@
-import withSpeech from "./withSpeech";
-
+import withSpeech from "./withSpeech/index.jsx";
 export { withSpeech };
