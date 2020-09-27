@@ -3,7 +3,7 @@ import { mount } from "enzyme";
 import sinon from "sinon";
 import _ from "lodash";
 import index from "./index";
-import MockWrappedComponent from "../helpers/MockWrappedComponent";
+import MockWrappedComponent from "../mock/MockWrappedComponent";
 
 describe("withSpeech", () => {
   let sandbox;
