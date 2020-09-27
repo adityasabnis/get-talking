@@ -12,3 +12,8 @@ dist/
 
 # Editor
 .idea/
+
+# Coverage
+.nyc_output
+coverage
+*.lcov
