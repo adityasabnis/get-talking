@@ -1,6 +1,5 @@
 import React from "react";
 import _ from "lodash";
-import PropTypes from "prop-types";
 
 const withSpeech = (Component) => {
   return class extends React.Component {
@@ -71,11 +70,6 @@ const withSpeech = (Component) => {
       );
     }
   };
-};
-
-withSpeech.propTypes = {
-  speechTextPropName: PropTypes.string.isRequired,
-  voiceUri: PropTypes.string.isRequired,
 };
 
 export default withSpeech;

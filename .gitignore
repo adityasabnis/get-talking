@@ -1,8 +1,11 @@
 # Coverage directory
-coverage
+coverage/
 
 # Dependency
-node_modules
+node_modules/
+
+# Dist directory
+dist/
 
 # Mac related
 .DS_Store

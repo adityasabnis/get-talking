@@ -2,7 +2,7 @@ import React from "react";
 import { mount } from "enzyme";
 import sinon from "sinon";
 import _ from "lodash";
-import withSpeech from "./index";
+import index from "./index";
 import MockWrappedComponent from "../helpers/MockWrappedComponent";
 
 describe("withSpeech", () => {
@@ -36,7 +36,7 @@ describe("withSpeech", () => {
       cancel: sandbox.spy(),
     };
 
-    ComponentWithSpeech = withSpeech(MockWrappedComponent);
+    ComponentWithSpeech = index(MockWrappedComponent);
   });
 
   afterEach(() => {
