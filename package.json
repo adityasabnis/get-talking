@@ -3,6 +3,9 @@
   "version": "1.0.2",
   "description": "Higher order component leveraging WebSpeechApi",
   "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "./node_modules/.bin/webpack --mode production",
     "test": "mocha --require @babel/register --require ./src/helpers/register.js --require ./src/helpers/dom.js 'src/**/*.spec.jsx'"
