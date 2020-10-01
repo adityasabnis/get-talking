@@ -6,17 +6,28 @@ const withSpeech = (Component, { voiceName, speechTextPropName }) => {
     constructor(props) {
       super(props);
 
-      this.state = {
-        voice: null,
-      };
-
       this.componentRef = React.createRef();
       this.utterance = new SpeechSynthesisUtterance();
 
-      speechSynthesis.addEventListener("voiceschanged", this.setSelectedVoice);
+      // Check if the voices are already loaded before the object construction
+      const voices = speechSynthesis.getVoices();
+
+      // Set the voice as the initial state.voice value as the `voiceschanged` event won't be triggered if voices are
+      // already loaded before the object construction
+      this.state = {
+        voice: voices.length
+          ? _.find(voices, (voice) => voice.name === voiceName)
+          : null,
+      };
+
+      // Add `voiceschanged` listener for scenarios when voices take long to load as they are loaded (async) by the browser
+      speechSynthesis.addEventListener(
+        "voiceschanged",
+        this.handleVoicesChanged
+      );
     }
 
-    setSelectedVoice = (event) => {
+    handleVoicesChanged = (event) => {
       event.preventDefault();
 
       const selectedVoice = _.find(
