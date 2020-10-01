@@ -1,6 +1,6 @@
 {
   "name": "get-talking",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "Higher order component leveraging WebSpeechApi",
   "main": "./dist/index.js",
   "files": [
