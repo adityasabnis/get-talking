@@ -2,7 +2,7 @@ import React from "react";
 import { mount } from "enzyme";
 import sinon from "sinon";
 import _ from "lodash";
-import index from "./index";
+import withSpeech from "./index";
 import MockWrappedComponent from "../mock/MockWrappedComponent";
 
 describe("withSpeech", () => {
@@ -27,7 +27,7 @@ describe("withSpeech", () => {
 
     const getVoicesStub = sinon
       .stub()
-      .callsFake(() => [{ voiceURI: "Karen" }, { voiceURI: "Alex" }]);
+      .callsFake(() => [{ voiceURI: "uri/Karen", name: 'Karen' }, { voiceURI: "uri/Alex", name: 'Alex' }]);
 
     global.speechSynthesis = {
       addEventListener: eventListenerStub,
@@ -36,7 +36,10 @@ describe("withSpeech", () => {
       cancel: sandbox.spy(),
     };
 
-    ComponentWithSpeech = index(MockWrappedComponent);
+    ComponentWithSpeech = withSpeech(MockWrappedComponent, {
+      voiceName: "Karen",
+      speechTextPropName: "label",
+    });
   });
 
   afterEach(() => {
@@ -48,8 +51,6 @@ describe("withSpeech", () => {
       <ComponentWithSpeech
         name="Component Name 1"
         label="This is some text"
-        speechTextPropName={"label"}
-        voiceUri={"Karen"}
       />
     );
 
@@ -62,8 +63,6 @@ describe("withSpeech", () => {
       <ComponentWithSpeech
         name="Component Name 1"
         label="This is some text"
-        speechTextPropName={"label"}
-        voiceUri={"Karen"}
       />
     );
 
@@ -79,8 +78,6 @@ describe("withSpeech", () => {
       <ComponentWithSpeech
         name="Component Name 1"
         label="This is some text"
-        speechTextPropName={"label"}
-        voiceUri={"Karen"}
       />
     );
 
@@ -95,7 +92,7 @@ describe("withSpeech", () => {
 
     expect(global.speechSynthesis.speak.calledOnce).to.equal(true);
     expect(global.speechSynthesis.speak.args[0]).to.eql([
-      { text: "This is some text", voice: { voiceURI: "Karen" } },
+      { text: "This is some text", voice: { voiceURI: "uri/Karen", name: 'Karen' } },
     ]);
   });
 
@@ -104,8 +101,6 @@ describe("withSpeech", () => {
       <ComponentWithSpeech
         name="Component Name 1"
         label="This is some text"
-        speechTextPropName={"label"}
-        voiceUri={"Karen"}
       />
     );
 

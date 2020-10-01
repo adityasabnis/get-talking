@@ -1,7 +1,7 @@
 import React from "react";
 import _ from "lodash";
 
-const withSpeech = (Component) => {
+const withSpeech = (Component, { voiceName, speechTextPropName }) => {
   return class extends React.Component {
     constructor(props) {
       super(props);
@@ -11,8 +11,8 @@ const withSpeech = (Component) => {
       };
 
       this.componentRef = React.createRef();
-
       this.utterance = new SpeechSynthesisUtterance();
+
       speechSynthesis.addEventListener("voiceschanged", this.setSelectedVoice);
     }
 
@@ -21,7 +21,7 @@ const withSpeech = (Component) => {
 
       const selectedVoice = _.find(
         speechSynthesis.getVoices(),
-        (voice) => voice.voiceURI === this.props.voiceUri
+        (voice) => voice.name === voiceName
       );
 
       if (selectedVoice) {
@@ -36,7 +36,7 @@ const withSpeech = (Component) => {
 
       this.utterance.text = _.get(
         wrappedComponent.props,
-        `${_.get(this.props, "speechTextPropName")}`
+        `${speechTextPropName}`
       );
 
       this.utterance.voice = this.state.voice;
@@ -48,12 +48,7 @@ const withSpeech = (Component) => {
     };
 
     renderWrappedComponent = () => {
-      return (
-        <Component
-          {..._.omit(this.props, ["speechTextPropName", "voiceUri"])}
-          ref={this.componentRef}
-        />
-      );
+      return <Component {...this.props} ref={this.componentRef} />;
     };
 
     render() {
