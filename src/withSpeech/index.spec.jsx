@@ -21,13 +21,14 @@ describe("withSpeech", () => {
       voice: "",
     });
 
-    const eventListenerStub = sinon.stub().callsFake((event, listener) => {
+    const eventListenerStub = sandbox.stub().callsFake((event, listener) => {
       eventMap[event] = listener;
     });
 
-    const getVoicesStub = sinon
-      .stub()
-      .callsFake(() => [{ voiceURI: "uri/Karen", name: 'Karen' }, { voiceURI: "uri/Alex", name: 'Alex' }]);
+    const getVoicesStub = sandbox.stub().callsFake(() => [
+      { voiceURI: "uri/Karen", name: "Karen" },
+      { voiceURI: "uri/Alex", name: "Alex" },
+    ]);
 
     global.speechSynthesis = {
       addEventListener: eventListenerStub,
@@ -47,11 +48,11 @@ describe("withSpeech", () => {
   });
 
   it("should correctly render original wrapped component when voices are not loaded", () => {
+    const getVoicesStub = sandbox.stub().returns([]);
+    global.speechSynthesis.getVoices = getVoicesStub;
+
     const wrapper = mount(
-      <ComponentWithSpeech
-        name="Component Name 1"
-        label="This is some text"
-      />
+      <ComponentWithSpeech name="Component Name 1" label="This is some text" />
     );
 
     const wrapperComponentWrapper = wrapper.find(MockWrappedComponent);
@@ -60,10 +61,7 @@ describe("withSpeech", () => {
 
   it("should correctly render component with speech wrapper when voices are loaded", () => {
     const wrapper = mount(
-      <ComponentWithSpeech
-        name="Component Name 1"
-        label="This is some text"
-      />
+      <ComponentWithSpeech name="Component Name 1" label="This is some text" />
     );
 
     eventMap["voiceschanged"]({ preventDefault: _.noop });
@@ -75,10 +73,7 @@ describe("withSpeech", () => {
 
   it("should correctly trigger speech with correct utterance when click is simulated", () => {
     const wrapper = mount(
-      <ComponentWithSpeech
-        name="Component Name 1"
-        label="This is some text"
-      />
+      <ComponentWithSpeech name="Component Name 1" label="This is some text" />
     );
 
     eventMap["voiceschanged"]({ preventDefault: _.noop });
@@ -92,16 +87,16 @@ describe("withSpeech", () => {
 
     expect(global.speechSynthesis.speak.calledOnce).to.equal(true);
     expect(global.speechSynthesis.speak.args[0]).to.eql([
-      { text: "This is some text", voice: { voiceURI: "uri/Karen", name: 'Karen' } },
+      {
+        text: "This is some text",
+        voice: { voiceURI: "uri/Karen", name: "Karen" },
+      },
     ]);
   });
 
   it("should correctly trigger speech cancel when mouseLeave is simulated", () => {
     const wrapper = mount(
-      <ComponentWithSpeech
-        name="Component Name 1"
-        label="This is some text"
-      />
+      <ComponentWithSpeech name="Component Name 1" label="This is some text" />
     );
 
     eventMap["voiceschanged"]({ preventDefault: _.noop });
