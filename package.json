@@ -40,7 +40,6 @@
   "homepage": "https://github.com/adityasabnis/get-talking#readme",
   "dependencies": {
     "lodash": "^4.17.20",
-    "prop-types": "^15.7.2",
     "react": "^16.13.1"
   },
   "engines": {
