@@ -14,4 +14,4 @@ Master Coverage Status: <br/>
 CodeSandBox Example: <br/>
 https://codesandbox.io/s/gettalking-adslotui-gkgxs
 
-![Sandbox Screenshot](https://user-images.githubusercontent.com/3688957/94395030-0f6c0800-01a2-11eb-8755-3f6ad54d1ab2.png)
+![Sandbox Screenshot](https://user-images.githubusercontent.com/3688957/94991800-b8fb3100-05c8-11eb-85cf-4a78e589b946.png)
