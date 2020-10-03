@@ -71,6 +71,27 @@ describe("withSpeech", () => {
     expect(hocSpeechActionWrapper).to.have.lengthOf(1);
   });
 
+  it("should correctly render component without error if selected voice does not belong to voice list", () => {
+    ComponentWithSpeech = withSpeech(MockWrappedComponent, {
+      voiceName: "Some_Unknown_Voice",
+      speechTextPropName: "label",
+    });
+
+    const wrapper = mount(
+      <ComponentWithSpeech name="Component Name 1" label="This is some text" />
+    );
+
+    eventMap["voiceschanged"]({ preventDefault: _.noop });
+    wrapper.update();
+
+    // Since the selected voice does not belong to the list of voice, render the raw wrapper component
+    const hocSpeechActionWrapper = wrapper.find(".gt__component-wrapper");
+    expect(hocSpeechActionWrapper).to.have.lengthOf(0);
+
+    const mockedComponentElementWrapper = wrapper.find(".comp__name");
+    expect(mockedComponentElementWrapper).to.have.lengthOf(1);
+  });
+
   it("should correctly trigger speech with correct utterance when click is simulated", () => {
     const wrapper = mount(
       <ComponentWithSpeech name="Component Name 1" label="This is some text" />
