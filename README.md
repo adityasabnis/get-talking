@@ -11,6 +11,14 @@ Master Build Status: <br/>
 Master Coverage Status: <br/>
 [![codecov](https://codecov.io/gh/adityasabnis/get-talking/branch/master/graph/badge.svg)](https://codecov.io/gh/adityasabnis/get-talking)
 
+PlayGround: <br/>
+It will start webpack dev server with hot-reload on port 8001 <br/>
+It renders CustomInput wrapped in withSpeech HOC.
+`npm run start` <br/>
+
+![Playground Example Screenshot](https://user-images.githubusercontent.com/73151902/97069763-21fd2400-161e-11eb-8904-55ab5683f31f.png)
+
+
 CodeSandBox Example: <br/>
 https://codesandbox.io/s/gettalking-adslotui-gkgxs
 
