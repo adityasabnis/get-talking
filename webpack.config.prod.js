@@ -1,11 +1,16 @@
 const path = require("path");
 
+const settings = {
+  srcPath: path.join(__dirname, "src"),
+  distPath: path.join(__dirname, "dist"),
+};
+
 module.exports = {
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: path.resolve(__dirname, "src"),
+        include: settings.srcPath,
         exclude: /(node_modules|dist)/,
         use: {
           loader: "babel-loader",
@@ -14,7 +19,7 @@ module.exports = {
     ],
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: settings.distPath,
     filename: "index.js",
     libraryTarget: "commonjs2",
   },
