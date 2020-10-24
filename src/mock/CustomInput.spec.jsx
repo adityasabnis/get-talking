@@ -8,10 +8,7 @@ describe("CustomInput", () => {
     const valueChangeSpy = sinon.spy();
 
     const wrapper = mount(
-      <CustomInput
-        defaultValue={"This is awesome"}
-        onValueChange={valueChangeSpy}
-      />
+      <CustomInput value={"This is awesome"} onValueChange={valueChangeSpy} />
     );
 
     const inputWrapper = wrapper.find("input");
@@ -23,10 +20,7 @@ describe("CustomInput", () => {
     const valueChangeSpy = sinon.spy();
 
     const wrapper = mount(
-      <CustomInput
-        defaultValue={"This is awesome"}
-        onValueChange={valueChangeSpy}
-      />
+      <CustomInput value={"This is awesome"} onValueChange={valueChangeSpy} />
     );
 
     let inputWrapper = wrapper.find("input");
@@ -41,7 +35,9 @@ describe("CustomInput", () => {
 
     inputWrapper = wrapper.find("input");
     expect(inputWrapper).to.have.lengthOf(1);
-    expect(inputWrapper.props().value).to.equal("New awesome value");
     expect(valueChangeSpy.calledOnce).to.equal(true);
+    expect(valueChangeSpy.args[0][0].target).to.eql({
+      value: "New awesome value",
+    });
   });
 });

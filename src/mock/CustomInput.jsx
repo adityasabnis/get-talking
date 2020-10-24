@@ -1,15 +1,17 @@
-import React, { useState } from "react";
-import _ from "lodash";
+import React from "react";
+import PropTypes from "prop-types";
 
-const CustomInput = ({ defaultValue, onValueChange }) => {
-  const [value, setValue] = useState(defaultValue);
-
-  const onChangeHandler = (event) => {
-    setValue(_.get(event, "target.value"));
-    onValueChange();
+class CustomInput extends React.Component {
+  static propTypes = {
+    value: PropTypes.string.isRequired,
+    onValueChange: PropTypes.func.isRequired,
   };
 
-  return <input value={value} onChange={onChangeHandler} />;
-};
+  render() {
+    return (
+      <input value={this.props.value} onChange={this.props.onValueChange} />
+    );
+  }
+}
 
 export default CustomInput;
