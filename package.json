@@ -7,9 +7,10 @@
     "dist"
   ],
   "scripts": {
-    "build": "./node_modules/.bin/webpack --mode production",
+    "build": "./node_modules/.bin/webpack --config webpack.config.prod.js --mode production",
     "test": "mocha --require @babel/register --require ./helpers/register.js --require ./helpers/dom.js 'src/**/*.spec.jsx'",
     "coverage": "nyc --reporter=html --reporter=lcov mocha --reporter=dot --require @babel/register --require ./helpers/register.js --require ./helpers/dom.js 'src/**/*.spec.jsx'",
+    "start": "webpack-dev-server --inline --progress --port 8001 --config webpack.config.js --mode development --open --hot",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "nyc": {
@@ -40,7 +41,8 @@
   "homepage": "https://github.com/adityasabnis/get-talking#readme",
   "dependencies": {
     "lodash": "^4.17.20",
-    "react": "^16.13.1"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "engines": {
     "node": ">=12"
@@ -54,6 +56,8 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
+    "html-webpack-plugin": "^4.4.1",
+    "clean-webpack-plugin": "^0.1.19",
     "babel-preset-env": "^1.7.0",
     "chai": "^4.2.0",
     "codecov": "^3.7.2",
@@ -66,6 +70,7 @@
     "react-dom": "^16.13.1",
     "sinon": "^9.0.3",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   }
 }
